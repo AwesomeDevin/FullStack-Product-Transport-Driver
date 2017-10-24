@@ -15,7 +15,7 @@ import Register from './components/Register.vue'
 
 // Routes
 const routes = [
-  { path: '/', component: Index },
+  { path: '/Index', component: Index },
   { path: '/about', component: About },
   { path: '/intro', component: Intro,
     children:[
