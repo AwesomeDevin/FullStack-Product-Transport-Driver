@@ -9,7 +9,7 @@
     <!-- <button class="button button-icon ion-navicon" slot="right"></button> -->
   </von-header>
        <ul>
-         <li><div><i class="ion-clipboard"></i></div><div><p>订单记录</p></div></li>
+         <router-link to="/order"><li><div><i class="ion-clipboard"></i></div><div><p>订单记录</p></div></li></router-link>
          <li><div><i class="ion-person-stalker"></i></div><div><p>我的用户</p></div></li>
          <li><div><i class="ion-ios-pie-outline"></i></div><div><p>盈利图表</p></div></li>
          <li><div><i class="ion-gear-b"></i></div><div><p>账户设置</p></div></li>
@@ -20,7 +20,7 @@
 </template>
 <script>
 import {VonHeader} from 'vonic/src/index.js'
-import io from 'socket.io-client';
+// import io from 'socket.io-client';
   export default {
     data () {
       return {
@@ -39,6 +39,10 @@ import io from 'socket.io-client';
   }
 </script>
 <style scoped lang='less'>
+  ul a{
+    color:white;
+    text-decoration: none;
+  }
   h2 {
     font-family: Candara,Calibri,Segoe,Segoe UI,Optima,Arial,sans-serif;
     color: #888;
@@ -65,7 +69,7 @@ import io from 'socket.io-client';
     .bar-header{
       height: 0.44rem;
       position: relative;
-      background: rgba(104, 100, 124, 0.75);
+      background: rgba(104, 100, 124, 0.2);
     }
   }
   ul{
