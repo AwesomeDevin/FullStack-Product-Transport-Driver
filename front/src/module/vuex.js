@@ -5,7 +5,12 @@ import io from 'socket.io-client';
 Vue.use(Vuex);
 const store = new Vuex.Store({
   state: {
-    
+    userInfo:{
+        userName:'邓大达',
+        tel:'13145950323',
+        head_img:null,
+        car:'粤A0062'
+      },
   },
   mutations: {
     

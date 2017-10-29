@@ -9,6 +9,15 @@ import Login from './components/Login.vue'
 import Order from './components/Order.vue'
 import Welcome from './components/Welcome.vue'
 import Register from './components/Register.vue'
+import SearchOrder from './components/SearchOrder.vue'
+import MyOrder from './components/MyOrder.vue'
+import SideMenu from './components/sidemenu.vue'
+import MyCustomer from './components/myCustomer.vue'
+import Chart from './components/Chart.vue'
+
+
+
+
 import store from './module/vuex.js'
 
 
@@ -18,14 +27,20 @@ import store from './module/vuex.js'
 const routes = [
   { path: '/Index', component: Index },
   { path: '/about', component: About },
-  { path: '/order', component: Order },
+  { path: '/sidemenu', component: SideMenu },
+  { path: '/customer', component: MyCustomer },
+  { path: '/chart', component: Chart },
+  { path: '/order', component: Order ,
+    children:[
+        {path:'search',component:SearchOrder},
+        {path:'mine',component:MyOrder},
+  ]},
   { path: '/intro', component: Intro,
     children:[
         {path:'welcome', component:Welcome},
         {path:'login', component:Login},
         {path:'register', component:Register},
-    ]
- },
+  ]},
   // { path: '/login', component: Login },
    {path:'*', redirect:'/intro/welcome'}  //404
 

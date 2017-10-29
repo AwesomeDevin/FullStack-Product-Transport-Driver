@@ -6,8 +6,15 @@
   <link rel="stylesheet" type="text/css" href="src/static/css/animate.css"/>
   <title>托卡【司机版】</title>
   <style type="text/css">
+  *::-webkit-scrollbar  {
+        width: 0.01rem;
+    }
     .root .navbar.visible{
         background: transparent;
+    }
+    .echarts{
+        width: 100% !important;
+        height: 4.5rem !important;
     }
     h1.title{
         color:white;
@@ -25,9 +32,9 @@
         width: 100%;
         height: 100%;
         z-index: 0;
-        filter:blur(3px);
+        /*filter:blur(3px);*/
         /*background:linear-gradient(45deg, #28675c, #49ac96, #44e88f);*/
-        background: linear-gradient(-45deg, #f9ad49, #f78e1e, #e84444);
+        background: linear-gradient(-45deg, #065870, #d28f48, #e84444);
         background-size: cover;
         filter:blur(4px);
     }

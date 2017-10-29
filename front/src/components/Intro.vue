@@ -2,7 +2,8 @@
 .bg{
     width: 100%;
     height: 5.68rem;
-    background: url('../static/img/1.jpg');
+    // background: url('../static/img/1.jpg');
+    background: linear-gradient(-45deg, #065870, #d28f48, #e84444);
     background-size: cover;
     position: relative;
     .intro{

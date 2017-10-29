@@ -5,14 +5,14 @@
      <div class="main">
         <von-header theme="dark">
     <!-- <button class="button button-icon ion-ios-arrow-back" slot="left"></button> -->
-    <p class="action" slot="title">Action</p>
+    <p class="action" slot="title">Tohcart</p>
     <!-- <button class="button button-icon ion-navicon" slot="right"></button> -->
   </von-header>
        <ul>
-         <router-link to="/order"><li><div><i class="ion-clipboard"></i></div><div><p>订单记录</p></div></li></router-link>
-         <li><div><i class="ion-person-stalker"></i></div><div><p>我的用户</p></div></li>
-         <li><div><i class="ion-ios-pie-outline"></i></div><div><p>盈利图表</p></div></li>
-         <li><div><i class="ion-gear-b"></i></div><div><p>账户设置</p></div></li>
+         <router-link to="/order/mine"><li><div><i class="ion-clipboard"></i></div><div><p>订单记录</p></div></li></router-link>
+         <router-link to="/customer"><li><div><i class="ion-person-stalker"></i></div><div><p>我的用户</p></div></li></router-link>
+         <router-link to="/chart"><li><div><i class="ion-ios-pie-outline"></i></div><div><p>盈收图表</p></div></li></router-link>
+         <router-link to="/sidemenu"><li><div><i class="ion-gear-b"></i></div><div><p>账户设置</p></div></li></router-link>
        </ul>
      </div>
     </div>
@@ -66,6 +66,8 @@ import {VonHeader} from 'vonic/src/index.js'
     height: 100%;
     display: flex;
     flex-direction:column;
+    background: linear-gradient(-45deg, #f9ad49, #f78e1e, #e84444);
+
     .bar-header{
       height: 0.44rem;
       position: relative;
@@ -104,17 +106,17 @@ import {VonHeader} from 'vonic/src/index.js'
       }
     }
   }
-  ul li:nth-child(1){
-    background-color: rgba(198, 137, 56, 0.59);
+  ul a:nth-child(1) li{
+    background-color: #1abc9c;
   }
-    ul li:nth-child(2){
-    background-color: rgba(223, 151, 118, 0.7);
+    ul a:nth-child(2) li{
+    background-color: #3498db;
   }
-    ul li:nth-child(3){
-    background-color: rgba(202, 96, 108, 0.87);
+    ul a:nth-child(3) li{
+    background-color:rgba(45, 167, 112, 0.91);
   }
-    ul li:nth-child(4){
-    background-color: rgba(194, 120, 133, 0.91);
+    ul a:nth-child(4) li{
+    background-color:rgba(67, 67, 89, 0.91);
   }
   .page{
     background: transparent;
