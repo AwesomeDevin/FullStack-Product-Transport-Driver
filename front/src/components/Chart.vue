@@ -61,10 +61,14 @@
             border-radius: 1em;
         }
         button.active{
-            background: #1abc9c;
+            background:linear-gradient(-45deg, #33debc, #29b8ad, #469f9c);
         }
     }
 }
+    .echarts{
+        width: 100% !important;
+        height: 4.5rem !important;
+    }
 
 </style>
 <template>
@@ -93,6 +97,8 @@
 // import g from '../module/global';
 import Vue from 'vue';
 import ECharts from 'vue-echarts/components/ECharts.vue'
+import echarts from 'echarts'
+
 import {VonHeader} from 'vonic/src/index.js'
 require('echarts/lib/chart/line')
 require('echarts/lib/component/tooltip')
@@ -104,7 +110,7 @@ export default{
     data(){
         return{
             userInfo:null,
-            data:['01','02','03','04','05','06','07','08'],
+            data:['01','02','03','04','05'],
            
         }
     },
@@ -141,15 +147,16 @@ export default{
                         animation: true
                     }
                 },
+
                 legend: {
                     data:['流量'],
-                    x: 'center'
+                    x: 'center',
+                   
                 },
-
                 
                 grid: {
                     left:'10%',
-                    height: '80%',
+                    height: '70%',
                     top:'15%',
                     width:'80%',
                 }, 
@@ -157,7 +164,7 @@ export default{
                     {
                         type : 'category',
                         boundaryGap : false,
-                        axisLine: {onZero: true},
+                        axisLine: {onZero: true,lineStyle:{'color':'#bdc3c7'}},
                         data: this.data
                     },
                    
@@ -166,20 +173,79 @@ export default{
                     {
                         name : '收入(￥)',
                         type : 'value',
+                        axisLine: {onZero: true,lineStyle:{'color':'#bdc3c7'}},
 
                         
                     },
                    
                 ],
+                color:['#2ecc71'],
+                dataZoom: [
+                {
+                    id: 'dataZoomX',
+                    type: 'slider',
+                    xAxisIndex: [0],
+                    filterMode: 'filter'
+                },
+                
+            ],
 
                 series : [
                     {
-                        name:'流量',
+                        name:'收入',
                         type:'line',
-                        symbolSize: 8,
+                        symbolSize: 10,
+                        borderColor:'black',
+                        symbol:"circle",
+                        label:{
+                            normal:{
+                                show:true,
+                                distance:10,
+                                color:'white',
+                                formatter:"￥{c}",
+                                backgroundColor:'#33debc',
+                                padding:[5,10],
+                                borderRadius:[50,50,50,50],
+                            }
+                        },
+                        itemStyle:{
+                          normal:{
+                              color:'#0fffd0',
+                              shadowColor:'#0fffd0',
+                              shadowBlur: 20,
+                          }  
+                        },
+                        lineStyle:{
+                          normal:{
+                              color:new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
+                                    offset: 0,
+                                    color: '#33debc'
+                                }, {
+                                    offset: 1,
+                                    color: 'rgba(255,255,255,0)'
+                                }]),
+                              shadowColor:'#0fffd0',
+                              shadowBlur: 20,
+                             
+                          }  
+                        },
+                        areaStyle:{
+                             normal:{
+                              color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
+                                    offset: 0,
+                                    color: 'rgba(51, 222, 188, 0.6)',
+                                    opacity:0.2,
+                                }, {
+                                    offset: 1,
+                                    color: 'rgba(255,255,255,0)'
+                                }]),
+                              // shadowColor:'#0fffd0',
+                              shadowBlur: 20,
+                          }  
+                      },
                         hoverAnimation: false,
                         data:[
-                            0.97,0.96,0.96,0.95,0.95,0.94,0.94,0.94
+                            497,296,596,325,595
                         ]
                     },
                 ]
