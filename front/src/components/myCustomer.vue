@@ -286,6 +286,10 @@ export default{
     },
     created(){
         this.userInfo = this.$store.state.userInfo;
+        if(!this.$store.state.userInfo.tel||this.$store.state.userInfo.tel.length<1)
+        {
+            this.$router.push('/intro/welcome');
+        }
         // bus.$on('getUserInfo',function(data){
         //  for(var key in data)
         //  {

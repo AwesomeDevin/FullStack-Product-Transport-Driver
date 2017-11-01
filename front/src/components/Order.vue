@@ -143,6 +143,10 @@ import {VonHeader} from 'vonic/src/index.js'
             {
                 this.tabIndex='1';
             }
+            if(!this.$store.state.userInfo.tel||this.$store.state.userInfo.tel.length<1)
+            {
+                this.$router.push('/intro/welcome');
+            }
         }
     }
 </script>

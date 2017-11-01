@@ -46,6 +46,10 @@
                     line-height: 0.34rem;
                     color:white;
                 }
+                 button:disabled{
+                    background: #262525;
+                    color:#ccc;
+                }
             }
             input{
                 line-height: 0.34rem;
@@ -87,15 +91,15 @@
             </div>
             <div class="main">
                 <label for="tel">
-                    <input type="text" id="tel" name="" placeholder="手机号" />
+                    <input type="text" id="tel" v-model="tel" name="" placeholder="手机号" />
                 </label>
                 <label for="pwd">
-                    <input type="password" id="pwd" name="" placeholder="密 码" />
+                    <input type="password" id="pwd" v-model="pwd" name="" placeholder="密 码" />
                 </label>
                 <label>
-                    <router-link  to="/Index"><button>登录</button></router-link>
+                    <button :disabled="!isMobileNumber" @click="login">登录</button>
                 </label>
-                <router-link  to="/intro/register"> <button class="toregister">注  册</button></router-link>
+                <router-link   to="/intro/register"><button  class="toregister">注  册</button></router-link>
             </div>
         
         </div>
@@ -108,10 +112,42 @@ import {VonInput} from 'vonic/src/index.js'
       return {
         msg: 'Log In ',
         tel:'',
-      }
+        pwd:'',  
+        }   
     },
     components:{
         'v-input':VonInput,
+    },
+    computed:{
+        isMobileNumber(){
+                return this.tel.match(/^1[34578]\d{9}$/)&&this.pwd?true:false;
+            }
+    },
+    methods:{
+        login(){
+            var self = this;
+            this.$http.get('http://localhost:4040/api/v1/transport/user/?tel='+this.tel+'&pwd='+this.pwd,{
+                emulateJSON:true
+            }).then(function(res){
+              
+                if(res.data.results.length>0)
+                {
+                    self.$store.commit('increment',res.data.results[0]);
+                    $toast.show('登录成功',500);
+                    self.$router.push('/Index');
+                }
+                else
+                {
+                    $toast.show('账号或密码错误',1000);
+                }
+            },function(res){
+                $toast.show('网络错误',1000);
+                
+            });
+        }
+    },
+    mounted(){
+        
     }
   }
 </script>

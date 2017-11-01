@@ -46,6 +46,10 @@
                     line-height: 0.34rem;
                     color:white;
                 }
+                button:disabled{
+                    background: #262525;
+                    color:#ccc;
+                }
             }
             input{
                 line-height: 0.34rem;
@@ -74,6 +78,7 @@
             border-radius: 4em;
 
         }
+
         .register{
             position: absolute;
             left: 0;
@@ -95,13 +100,13 @@
             </div>
             <div class="main">
                 <label for="tel">
-                    <input type="text" id="tel" name="" placeholder="手机号" />
+                    <input type="text" id="tel" v-model="tel" name="" placeholder="手机号" />
                 </label>
                 <label for="pwd">
-                    <input type="password" id="pwd" name="" placeholder="密 码" />
+                    <input type="password" id="pwd" v-model="pwd" name="" placeholder="密 码" />
                 </label>
                 <label>
-                    <router-link  to="/Index"><button>注册</button></router-link>
+                    <button :disabled="!isMobileNumber"  @click="register">注册</button>
                 </label>
                 <!-- <router-link  to="/intro/register"> <button class="toregister">注  册</button></router-link> -->
             </div>
@@ -116,7 +121,55 @@ import {VonInput} from 'vonic/src/index.js'
       return {
         msg: 'Sign Up ',
         tel:'',
+        pwd:'',
       }
+    },
+    methods:{
+        register(){
+            var self = this;
+            console.log(this.tel,this.pwd);
+            var create_time = parseInt(new Date().getTime()/1000);
+
+            // var fd = new FormData();
+            // fd.append('image',blob,'default.jpg');
+            this.$http.post('http://localhost:4040/api/v1/transport/user/',{
+                pwd:1,
+                tel:20,
+                create_time:create_time,
+                name:'asd',
+                user_img:'src/static/img/1.jpg',
+                car_plate:'',
+            },{
+                emulateJSON:true
+            }).then(function(res){
+                if(res)
+                {
+                    self.$store.commit('increment',res);
+                    $toast.show('注册成功',500);
+                    self.$router.push('/Index');
+                }
+                else
+                {
+                    $toast.show('注册失败',1000);
+                }
+            },function(res){
+                $toast.show('注册失败',1000);
+                alert(res.status);
+            });
+        },
+        dataURLtoBlob(dataurl){
+             var arr = dataurl.split(','), mime = arr[0].match(/:(.*?);/)[1],
+                bstr = atob(arr[1]), n = bstr.length, u8arr = new Uint8Array(n);
+            while(n--){
+                u8arr[n] = bstr.charCodeAt(n);
+            }
+            return new Blob([u8arr], {type:mime});
+        },
+    },
+    computed:{
+        isMobileNumber(){
+                return this.tel.match(/^1[34578]\d{9}$/)&&this.pwd?true:false;
+            }
     },
     components:{
         'v-input':VonInput,

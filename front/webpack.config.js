@@ -23,6 +23,10 @@ module.exports = {
         }
       },
       {
+        test: /\.less$/,
+        loader: "style-loader!css-loader!less-loader"
+      },
+      {
         test: /\.js$/,
         loader: 'babel-loader',
         exclude: /node_modules/,
@@ -33,13 +37,17 @@ module.exports = {
         loader: 'style-loader!css-loader!sass-loader'
       },
       {
-        test: /\.(png|jpg|gif|svg)|((eot|woff|ttf|svg)[\?]?.*)$/,
-        loader: 'url-loader',
+        test: /\.css$/,
+        loader: 'style-loader!css-loader'
+      },
+      {
+        test: /\.(png|jpg|gif|svg)|((eot|woff|tt
         query: {
           limit: 10000,
           name: '[name].[ext]?[hash]'
         }
-      }
+      }f|svg)[\?]?.*)$/,
+        loader: 'url-loader',
     ]
   },
   resolve: {

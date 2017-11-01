@@ -1,6 +1,9 @@
 import Vue from 'vue'
 import Vonic from 'vonic/src/index.js'
-
+import VueResource from 'vue-resource'
+const jQuery = require('jquery');
+window.jQuery = jQuery;
+window.$ = window.jQuery;
 // Page Components
 import Index from './components/Index.vue'
 import About from './components/About.vue'
@@ -14,6 +17,8 @@ import MyOrder from './components/MyOrder.vue'
 import SideMenu from './components/sidemenu.vue'
 import MyCustomer from './components/myCustomer.vue'
 import Chart from './components/Chart.vue'
+import ScreenShot from './components/screenshot.vue'
+
 
 
 
@@ -21,8 +26,9 @@ import Chart from './components/Chart.vue'
 import store from './module/vuex.js'
 
 
-
-
+Vue.use(VueResource)
+require('./static/css/style.less')
+require('../node_modules/cropperjs/dist/cropper.min.css');
 // Routes
 const routes = [
   { path: '/Index', component: Index },
@@ -30,6 +36,8 @@ const routes = [
   { path: '/sidemenu', component: SideMenu },
   { path: '/customer', component: MyCustomer },
   { path: '/chart', component: Chart },
+  { path: '/screenshot', component: ScreenShot },
+
   { path: '/order', component: Order ,
     children:[
         {path:'search',component:SearchOrder},

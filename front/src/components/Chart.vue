@@ -110,7 +110,7 @@ export default{
     data(){
         return{
             userInfo:null,
-            data:['01','02','03','04','05'],
+            data:['01','02','03','04','05','06','07','08'],
            
         }
     },
@@ -185,6 +185,8 @@ export default{
                     id: 'dataZoomX',
                     type: 'slider',
                     xAxisIndex: [0],
+                     start: 50,
+                    end: 100,
                     filterMode: 'filter'
                 },
                 
@@ -245,7 +247,7 @@ export default{
                       },
                         hoverAnimation: false,
                         data:[
-                            497,296,596,325,595
+                            497,296,596,325,595,200,400,356,700
                         ]
                     },
                 ]
@@ -261,7 +263,10 @@ export default{
     },
     mounted(){
         this.userInfo = this.$store.state.userInfo;
-        console.log(this.$refs.echart.$el.offsetWidth);
+            if(!this.$store.state.userInfo.tel||this.$store.state.userInfo.tel.length<1)
+            {
+                this.$router.push('/intro/welcome');
+            }
         // bus.$on('getUserInfo',function(data){
         //  for(var key in data)
         //  {

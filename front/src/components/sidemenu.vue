@@ -45,6 +45,10 @@
 		padding:0.15rem 0;
 
 	}
+	p{
+		height: 0.2rem;
+		line-height: 0.2rem;
+	}
 	p i{
 		font-size: 0.2rem;
 	}
@@ -53,12 +57,29 @@
 	background: transparent;
 	color:white;
 	border:0;
+	.btn{
+		display: inline-block;
+	}
 }
 .hairline-bottom:after{
 	background-color: #625e5e;
 }
 .hairline-bottom:before{
 	background-color: #625e5e;
+}
+h1.title{
+	color:black;
+}
+.info .upload{
+	position: relative;
+}
+.info .upload input{
+	position: absolute;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	opacity: 0;
 }
 </style>
 <template>
@@ -70,25 +91,32 @@
 	  </von-header>
 	<div class="content">
 		<div class="info">
-			<img src="../static/img/1.jpg" alt="">
-			<p>{{userInfo.userName}}</p>
+			<div class="upload">
+				<input type="file" name="img" @change="chooseImg" />
+				<!-- <img src="../static/img/1.jpg" alt=""> -->
+				<img :src="userInfo.head_img" alt="">
+
+			</div>
+			<p>{{userInfo.name}}</p>
 			<p>{{userInfo.car}}</p>
 			<p>{{userInfo.tel}}</p>
 			<ul>
 				<li><p>用户数</p><p><i class="ion-ios-people"></i></p><p>25</p></li>
 				<li><p>订单数</p><p><i class="ion-android-list"></i></p><p>200</p></li>
-				<li><p>账户余额</p><p><i class="ion-social-yen"></i></p><p>￥4000</p></li>
+				<li><p>账户余额</p><p><i class="ion-social-yen"></i></p><p>￥{{userInfo.money}}</p></li>
 			</ul>
 		</div>
 		<div class="main">
 			<von-list>
-				<von-item>修改昵称</von-item>
-				<von-item>修改车牌号</von-item>
-				<von-item>修改手机号</von-item>
-				<von-item>退出登录</von-item>
+				<von-item><div class="btn" @click="showForm('修改昵称',userInfo.name,'name')">修改昵称</div></von-item>
+				<von-item><div class="btn" @click="showForm('修改车牌号',userInfo.car,'car_plate')">修改车牌号</div></von-item>
+				<von-item><div class="btn" @click="showForm('修改手机号',userInfo.tel,'tel')">修改手机号</div></von-item>
+				<von-item><div class="btn" @click="showModal">关于Tohart</div></von-item>
+				<von-item><div class="btn" @click="logout">退出登录</div></von-item>
 			</von-list>
 		</div>
 	</div>
+	<define-form @tohide="tohide" :userInfo="userInfo" :valuekey="valuekey" :value="value" :hideForm="hideForm" :title="formtitle"></define-form>
 </div>
 </template>
 
@@ -98,6 +126,8 @@
 import Vue from 'vue';
 import {VonHeader} from 'vonic/src/index.js'
 import {List,Item} from 'vonic/src/index.js'
+import MyModal from './MyModal.vue'
+import Form from './Form.vue'
 
 export default{
 	watch:{
@@ -106,29 +136,82 @@ export default{
 	data(){
 		return{
 			userInfo:null,
+			modal: undefined,
+			formtitle:null,
+			hideForm:true,
+			value:null,
+			valuekey:null,
 		}
 	},
 	components:{
         'von-header':VonHeader,
         'von-list':List,
         'von-item':Item,
+        'define-form':Form,
 
 
     },
 	methods:{
-		clickBody(){
-			
+		showForm(txt,val,k){
+			this.formtitle = txt;
+			this.hideForm = false;
+			if (val)
+			{
+				this.value=val;
+				this.valuekey=k;
+			}
 		},
+		showModal() {
+	         this.modal.show()
+	      },
 		logout(){
-			
+			this.$store.commit('increment',null);
+			$toast.show('已退出',1000);
+			this.$router.push('/intro/login');
 		},
 		goBack(){
 			
 			this.$router.push('/Index');
-		}
+		},
+		tohide(data){
+			this.hideForm = data;
+		},
+		chooseImg(e){
+				if(!this.userInfo.tel)
+				{
+					this.$router.push('/intro/welcome');
+					return;
+				}
+				console.log('>>>>',parseInt(e.target.files[0]).size/1024>300,e.target.files[0].size/1024);
+				if( parseInt(e.target.files[0].size)/1024>300)
+				{
+					$toast.show('错误,请传入图片小于300kb的图片');
+					return;
+				}
+				this.$store.commit('chooseImg',e.target.files[0]);
+				this.$router.push('/screenshot');
+
+			},
 	},
+	mounted() {
+      $modal.fromComponent(MyModal, {
+        title: 'Tohart信息',
+        theme: 'default'
+      }).then((modal) => {
+        this.modal = modal
+      })
+    },
+    destroyed() {
+      if (this.modal)
+        $modal.destroy(this.modal)
+    },
 	created(){
 		this.userInfo = this.$store.state.userInfo;
+		console.log(this.userInfo);
+		if(!this.$store.state.userInfo.tel||this.$store.state.userInfo.tel.length<1||!this.$store.state.userInfo.id)
+        {
+            this.$router.push('/intro/welcome');
+        }
 		// bus.$on('getUserInfo',function(data){
 		// 	for(var key in data)
 		// 	{
@@ -139,7 +222,7 @@ export default{
 		
 		// this.userInfo.head_img = 'src/assets/logo.png';
 		// this.userInfo.tel='13145950323';
-		// this.userInfo.username = 'Tohcart';
+		// this.userInfo.name = 'Tohcart';
 	}
 }
 </script>
