@@ -92,7 +92,7 @@ h1.title{
 	<div class="content">
 		<div class="info">
 			<div class="upload">
-				<input type="file" name="img" @change="chooseImg" />
+				<input type="file" accept="image/png,image/jpg, image/jpeg" name="img" @change="chooseImg" />
 				<!-- <img src="../static/img/1.jpg" alt=""> -->
 				<img :src="userInfo.head_img" alt="">
 
@@ -182,7 +182,6 @@ export default{
 					this.$router.push('/intro/welcome');
 					return;
 				}
-				console.log('>>>>',parseInt(e.target.files[0]).size/1024>300,e.target.files[0].size/1024);
 				if( parseInt(e.target.files[0].size)/1024>300)
 				{
 					$toast.show('错误,请传入图片小于300kb的图片');
@@ -212,17 +211,7 @@ export default{
         {
             this.$router.push('/intro/welcome');
         }
-		// bus.$on('getUserInfo',function(data){
-		// 	for(var key in data)
-		// 	{
-		// 		Vue.set(this.userInfo,key,data[key]);
-		// 	}
-		// 	console.log('sideMenu',this.userInfo);
-		// })
-		
-		// this.userInfo.head_img = 'src/assets/logo.png';
-		// this.userInfo.tel='13145950323';
-		// this.userInfo.name = 'Tohcart';
-	}
+	},
+	
 }
 </script>

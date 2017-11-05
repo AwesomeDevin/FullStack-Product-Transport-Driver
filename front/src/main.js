@@ -18,17 +18,21 @@ import SideMenu from './components/sidemenu.vue'
 import MyCustomer from './components/myCustomer.vue'
 import Chart from './components/Chart.vue'
 import ScreenShot from './components/screenshot.vue'
+import Vconfirm from '../confirm'
 
 
 
 
 
 import store from './module/vuex.js'
-
+// import Router from 'vue-router'
 
 Vue.use(VueResource)
+Vue.use(Vconfirm)
+
 require('./static/css/style.less')
 require('../node_modules/cropperjs/dist/cropper.min.css');
+require('font-awesome/css/font-awesome.css');
 // Routes
 const routes = [
   { path: '/Index', component: Index },
@@ -54,6 +58,8 @@ const routes = [
 
 
 ]
+
+
 
 Vue.use(Vonic.app, {
   routes: routes,

@@ -149,9 +149,12 @@ export default{
                 },
 
                 legend: {
-                    data:['流量'],
-                    x: 'center',
-                   
+                    data:['收入'],
+                    x: 'right',
+                   y:'2%',
+                   textStyle:{
+                    color:'#33debc'
+                   }
                 },
                 
                 grid: {

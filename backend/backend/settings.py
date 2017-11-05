@@ -40,6 +40,7 @@ INSTALLED_APPS = (
     'transport',
     'rest_framework',
     'corsheaders',
+    'api',
 )
 
 

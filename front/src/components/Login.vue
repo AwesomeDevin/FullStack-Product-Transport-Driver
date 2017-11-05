@@ -125,11 +125,12 @@ import {VonInput} from 'vonic/src/index.js'
     },
     methods:{
         login(){
+            $loading.show();
             var self = this;
             this.$http.get('http://localhost:4040/api/v1/transport/user/?tel='+this.tel+'&pwd='+this.pwd,{
                 emulateJSON:true
             }).then(function(res){
-              
+              $loading.hide();
                 if(res.data.results.length>0)
                 {
                     self.$store.commit('increment',res.data.results[0]);
@@ -141,6 +142,7 @@ import {VonInput} from 'vonic/src/index.js'
                     $toast.show('账号或密码错误',1000);
                 }
             },function(res){
+                $loading.hide();
                 $toast.show('网络错误',1000);
                 
             });

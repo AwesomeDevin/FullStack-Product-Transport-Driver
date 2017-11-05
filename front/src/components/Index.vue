@@ -9,7 +9,7 @@
     <!-- <button class="button button-icon ion-navicon" slot="right"></button> -->
   </von-header>
        <ul>
-         <router-link to="/order/mine"><li><div><i class="ion-clipboard"></i></div><div><p>订单记录</p></div></li></router-link>
+         <router-link to="/order/mine"><li><div><i class="ion-clipboard"></i></div><div><p>订单查看</p></div></li></router-link>
          <router-link to="/customer"><li><div><i class="ion-person-stalker"></i></div><div><p>我的用户</p></div></li></router-link>
          <router-link to="/chart"><li><div><i class="ion-ios-pie-outline"></i></div><div><p>盈收图表</p></div></li></router-link>
          <router-link to="/sidemenu"><li><div><i class="ion-gear-b"></i></div><div><p>账户设置</p></div></li></router-link>

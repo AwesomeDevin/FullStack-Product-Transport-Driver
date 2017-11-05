@@ -126,6 +126,7 @@ import {VonInput} from 'vonic/src/index.js'
     },
     methods:{
         register(){
+            $loading.show();
             var self = this;
             console.log(this.tel,this.pwd);
             var create_time = parseInt(new Date().getTime()/1000);
@@ -142,9 +143,10 @@ import {VonInput} from 'vonic/src/index.js'
             },{
                 emulateJSON:true
             }).then(function(res){
-                if(res)
+                $loading.hide();
+                if(res.data)
                 {
-                    self.$store.commit('increment',res);
+                    self.$store.commit('increment',res.data);
                     $toast.show('注册成功',500);
                     self.$router.push('/Index');
                 }
@@ -153,6 +155,7 @@ import {VonInput} from 'vonic/src/index.js'
                     $toast.show('注册失败',1000);
                 }
             },function(res){
+                $loading.hide();
                 $toast.show('注册失败',1000);
                 alert(res.status);
             });
