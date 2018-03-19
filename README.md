@@ -1,6 +1,8 @@
 # Overview
 该项目分用户版、司机版，通过socket.io通讯实现实时下单以及文件上传修改头像等功能。
 
+
+* Ui框架使用的是Vonic 官方文档请看:https://wangdahoo.github.io/vonic/docs/#/
 * 查看用户版请到 https://github.com/Rise-Devin/FullStack-Product-Transport-User
 
 # FullStack-Product-Transport-Driver
