@@ -32,7 +32,8 @@ Vue.use(Vconfirm)
 
 require('./static/css/style.less')
 require('../node_modules/cropperjs/dist/cropper.min.css');
-require('font-awesome/css/font-awesome.css');
+require('../font-awesome/css/font-awesome.css');
+// require('font-awesome/css/font-awesome.css');
 // Routes
 const routes = [
   { path: '/Index', component: Index },
