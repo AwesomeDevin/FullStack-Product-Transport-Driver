@@ -2,9 +2,9 @@
   "name": "vonic-template",
   "version": "2.0.0",
   "description": "Webpack Template for Vonic 2.",
-  "author": "wangdahoo <157195705@qq.com>",
+  "author": "wb.dengwen <wb.dengwen@mesg.corp.netease.com>",
   "scripts": {
-    "dev": "webpack-dev-server --inline --hot --port=8081",
+    "dev": "webpack-dev-server --inline --hot --port=3030",
     "build": "cross-env NODE_ENV=production webpack --progress --hide-modules"
   },
   "dependencies": {
